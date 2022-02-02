@@ -1,0 +1,33 @@
+load("@//bazel:deps.bzl", "COMMON_DEPS")
+load("@io_bazel_rules_docker//container:container.bzl", "container_image")
+
+java_library(
+    name = "deps",
+    srcs = glob(["**/src/main/java/**/*.java"]),
+    resources = glob(["**/src/main/resources/**"]),
+    visibility = ["//visibility:public"],
+    deps = COMMON_DEPS
+)
+
+java_binary(
+    name = "service",
+    args = [],
+    main_class = "com.example.HelloWorldMain",
+    visibility = ["//visibility:public"],
+    runtime_deps = [
+        ":deps",
+    ],
+)
+
+container_image(
+    name = "container",
+    base = "@java11//image",
+    cmd = [
+        "java",
+        "-jar",
+        "service_deploy.jar"
+    ],
+    files = [
+        ":service_deploy.jar",
+    ],
+)

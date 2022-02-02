@@ -1,0 +1,9 @@
+bazel-bin
+bazel-micifuz
+bazel-out
+bazel-quarkus-bazel-example
+bazel-testlogs
+.ijwb/.bazelproject
+.ijwb/.blaze/modules/.project-data-dir.iml
+.ijwb/.blaze/modules/.workspace.iml
+.ijwb/*
